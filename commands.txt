@@ -1,0 +1,17 @@
+cd F:\ASBT\ai_broker
+.\.venv\Scripts\Activate.ps1
+python main.py
+
+EndPoint
+https://paper-api.alpaca.markets/v2
+
+Key
+PKDNUQZKGINWVMU474477RARCX
+
+Secret
+793pZgiopQi3WgaPvZZ5SKpGCcfcx6aKhBWFY4zrRvhX
+
+setx ALPACA_API_KEY "PKDNUQZKGINWVMU474477RARCX"
+setx ALPACA_API_SECRET "793pZgiopQi3WgaPvZZ5SKpGCcfcx6aKhBWFY4zrRvhX"
+
+Droplets password: DFcmTdW4D-urLMe

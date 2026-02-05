@@ -1,0 +1,52 @@
+trading:
+  timeframe: "5Min"
+  polling_seconds: 30
+  max_symbols: 10
+  always_include: ["SPY"]
+
+risk:
+  risk_per_trade_pct: 1.0
+  max_daily_loss_pct: 2.0
+  max_trades_per_day: 5
+  max_positions: 5
+  max_exposure_pct: 50.0
+  cooldown_after_trade_seconds: 60
+  cooldown_after_loss_seconds: 300
+  volatility_pause_atr_mult: 3.0
+  min_bars_required: 50
+
+clustering:
+  n_clusters: 12
+  min_cluster_trades: 30
+  min_expectancy: 0.001
+  retrain_interval_hours: 24
+  features:
+    - rsi14
+    - ema9
+    - ema21
+    - ema_spread
+    - atr14
+    - atr_pct
+    - volume_zscore
+    - ret_1bar
+    - ret_3bar
+    - ret_6bar
+
+news:
+  enabled: false
+  check_interval_seconds: 300
+  pause_on_high_impact: true
+  block_symbols_on_negative: true
+  risk_reduction_pct: 50.0
+
+reporting:
+  reports_dir: "reports"
+  daily_report_hour: 16
+  weekly_report_day: 5
+
+database:
+  path: "ai_broker.db"
+
+logging:
+  level: "INFO"
+  file: "ai_broker.log"

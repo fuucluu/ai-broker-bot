@@ -1,0 +1,21 @@
+# AI Broker Dependencies
+# Python 3.10+ required
+
+# Alpaca SDK for trading and market data
+alpaca-py>=0.21.0
+
+# Data processing
+pandas>=2.0.0
+numpy>=1.24.0
+
+# Machine learning
+scikit-learn>=1.3.0
+
+# Configuration
+pyyaml>=6.0
+
+# HTTP requests (for news API)
+requests>=2.31.0
+
+# Timezone handling (stdlib in 3.9+, but explicit for clarity)
+# No extra package needed - using zoneinfo from stdlib

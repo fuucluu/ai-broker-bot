@@ -1,0 +1,251 @@
+"""Trade signal scoring with AI memory integration."""
+import logging
+from typing import Dict, Optional, Tuple
+from dataclasses import dataclass
+import numpy as np
+from engine.persistence import Database
+from engine.patterns import PatternRecognizer
+from engine.features import get_feature_vector, get_market_regime
+import pandas as pd
+
+logger = logging.getLogger("ai_broker.scorer")
+
+@dataclass
+class TradeSignal:
+    symbol: str
+    side: str  # 'buy' or 'sell'
+    score: float
+    cluster_id: int
+    cluster_quality: str
+    expectancy: float
+    confidence: float
+    reason: str
+    features: Dict
+
+class Scorer:
+    def __init__(self, db: Database, pattern_recognizer: PatternRecognizer, config: Dict):
+        self.db = db
+        self.patterns = pattern_recognizer
+        self.config = config.get('clustering', {})
+        self.min_trades = self.config.get('min_cluster_trades', 30)
+        self.min_expectancy = self.config.get('min_expectancy', 0.001)
+    
+    def evaluate_entry(self, symbol: str, features: pd.DataFrame, 
+                       spy_features: pd.DataFrame = None) -> Optional[TradeSignal]:
+        """Evaluate whether to enter a trade."""
+        if features is None or len(features) < 1:
+            return None
+        
+        # Get feature vector
+        vector = get_feature_vector(features)
+        if vector is None:
+            return None
+        
+        # Add sample for training
+        self.patterns.add_sample(vector)
+        
+        # Predict cluster
+        cluster_id = self.patterns.predict_cluster(vector)
+        if cluster_id is None:
+            return None
+        
+        # Check cluster quality
+        should_trade, reason = self.patterns.should_trade_cluster(
+            cluster_id, self.min_trades, self.min_expectancy
+        )
+        
+        if not should_trade:
+            logger.debug(f"{symbol} cluster {cluster_id}: {reason}")
+            return None
+        
+        # Get cluster stats
+        quality = self.patterns.get_cluster_quality(cluster_id)
+        
+        # Get symbol stats for adjustments
+        symbol_stats = self.db.get_symbol_stats(symbol)
+        
+        # Calculate base score
+        score = self._calculate_score(features, quality, symbol_stats)
+        
+        # Determine side based on features
+        side = self._determine_side(features)
+        
+        # Apply regime filter
+        if spy_features is not None:
+            regime = get_market_regime(spy_features)
+            score = self._apply_regime_adjustment(score, side, regime)
+        
+        # Minimum score threshold
+        if score < 0.3:
+            return None
+        
+        # Calculate confidence
+        confidence = self._calculate_confidence(quality, symbol_stats)
+        
+        return TradeSignal(
+            symbol=symbol,
+            side=side,
+            score=score,
+            cluster_id=cluster_id,
+            cluster_quality=quality['quality'],
+            expectancy=quality['expectancy'],
+            confidence=confidence,
+            reason=f"Cluster {cluster_id} ({quality['quality']}), score={score:.2f}",
+            features={
+                'rsi': features.iloc[-1].get('rsi14', 50),
+                'ema_spread': features.iloc[-1].get('ema_spread', 0),
+                'atr_pct': features.iloc[-1].get('atr_pct', 1),
+                'volume_zscore': features.iloc[-1].get('volume_zscore', 0)
+            }
+        )
+    
+    def _calculate_score(self, features: pd.DataFrame, quality: Dict, 
+                        symbol_stats: Optional[Dict]) -> float:
+        """Calculate entry score."""
+        score = 0.5  # Base score
+        
+        row = features.iloc[-1]
+        
+        # Cluster quality bonus
+        if quality['quality'] == 'excellent':
+            score += 0.3
+        elif quality['quality'] == 'good':
+            score += 0.2
+        elif quality['quality'] == 'marginal':
+            score += 0.1
+        
+        # Win rate bonus
+        if quality['win_rate'] > 0.6:
+            score += 0.15
+        elif quality['win_rate'] > 0.55:
+            score += 0.1
+        
+        # Expectancy bonus
+        if quality['expectancy'] > 0.02:
+            score += 0.1
+        
+        # RSI extremes (mean reversion opportunity)
+        rsi = row.get('rsi14', 50)
+        if 30 < rsi < 70:
+            score += 0.05  # Neutral RSI is safer
+        
+        # Volume confirmation
+        vol_z = row.get('volume_zscore', 0)
+        if vol_z > 1:
+            score += 0.05  # Above average volume
+        
+        # Symbol track record
+        if symbol_stats:
+            sym_win_rate = symbol_stats['wins'] / max(symbol_stats['total_trades'], 1)
+            if sym_win_rate > 0.55 and symbol_stats['total_trades'] > 10:
+                score += 0.1
+            
+            # Penalty for consecutive losses
+            if symbol_stats['consecutive_losses'] >= 3:
+                score -= 0.2
+        
+        return min(max(score, 0), 1)  # Clamp 0-1
+    
+    def _determine_side(self, features: pd.DataFrame) -> str:
+        """Determine trade side based on features."""
+        row = features.iloc[-1]
+        
+        ema_spread = row.get('ema_spread', 0)
+        rsi = row.get('rsi14', 50)
+        ret_1bar = row.get('ret_1bar', 0)
+        
+        # Trend following
+        bullish_signals = 0
+        bearish_signals = 0
+        
+        if ema_spread > 0.2:
+            bullish_signals += 1
+        elif ema_spread < -0.2:
+            bearish_signals += 1
+        
+        if rsi > 50:
+            bullish_signals += 1
+        else:
+            bearish_signals += 1
+        
+        if ret_1bar > 0:
+            bullish_signals += 1
+        else:
+            bearish_signals += 1
+        
+        return 'buy' if bullish_signals > bearish_signals else 'sell'
+    
+    def _apply_regime_adjustment(self, score: float, side: str, regime: str) -> float:
+        """Adjust score based on market regime."""
+        if regime == 'high_volatility':
+            score *= 0.7  # Reduce in volatile markets
+        elif regime == 'uptrend' and side == 'buy':
+            score *= 1.1  # Boost longs in uptrend
+        elif regime == 'downtrend' and side == 'sell':
+            score *= 1.1  # Boost shorts in downtrend
+        elif regime == 'uptrend' and side == 'sell':
+            score *= 0.8  # Reduce shorts in uptrend
+        elif regime == 'downtrend' and side == 'buy':
+            score *= 0.8  # Reduce longs in downtrend
+        
+        return min(score, 1.0)
+    
+    def _calculate_confidence(self, quality: Dict, symbol_stats: Optional[Dict]) -> float:
+        """Calculate trade confidence level."""
+        confidence = 0.5
+        
+        # More trades = more confidence
+        if quality['trades'] >= 100:
+            confidence += 0.2
+        elif quality['trades'] >= 50:
+            confidence += 0.1
+        
+        # Consistent win rate
+        if quality['win_rate'] > 0.55:
+            confidence += 0.15
+        
+        # Good symbol history
+        if symbol_stats and symbol_stats['total_trades'] >= 20:
+            sym_win_rate = symbol_stats['wins'] / symbol_stats['total_trades']
+            if sym_win_rate > 0.5:
+                confidence += 0.1
+        
+        return min(confidence, 1.0)
+    
+    def should_exit(self, symbol: str, entry_price: float, current_price: float,
+                   side: str, features: pd.DataFrame) -> Tuple[bool, str]:
+        """Determine if position should be exited."""
+        if features is None or len(features) < 1:
+            return False, ""
+        
+        row = features.iloc[-1]
+        atr_pct = row.get('atr_pct', 1)
+        
+        # Calculate P&L
+        if side == 'buy':
+            pnl_pct = ((current_price - entry_price) / entry_price) * 100
+        else:
+            pnl_pct = ((entry_price - current_price) / entry_price) * 100
+        
+        # Stop loss: 2x ATR
+        stop_pct = atr_pct * 2
+        if pnl_pct < -stop_pct:
+            return True, f"Stop loss hit ({pnl_pct:.2f}%)"
+        
+        # Take profit: 3x ATR
+        target_pct = atr_pct * 3
+        if pnl_pct > target_pct:
+            return True, f"Take profit hit ({pnl_pct:.2f}%)"
+        
+        # Trailing stop after 1.5x ATR profit
+        if pnl_pct > atr_pct * 1.5:
+            # Check if price reversed significantly
+            rsi = row.get('rsi14', 50)
+            if side == 'buy' and rsi > 75:
+                return True, "Overbought exit"
+            elif side == 'sell' and rsi < 25:
+                return True, "Oversold exit"
+        
+        # Time-based exit check (not implemented here, handled in runtime)
+        
+        return False, ""
