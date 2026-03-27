@@ -31,7 +31,6 @@ class TradingEngine:
         self.symbols = load_symbols(self.config.get("symbols_file", "config/symbols.txt"))
 
         setup_logging(self.config.get("logging", {}))
-
         check_paper_mode_safety(self.config)
 
         db_path = self.config.get("database", {}).get("path", "ai_broker.db")
@@ -84,12 +83,10 @@ class TradingEngine:
             while self.running:
                 loop_start = time.time()
 
-                # ✅ DAILY EMAIL REPORT (PRODUCTION SAFE)
+                # ✅ EMAIL REPORT
                 now = datetime.utcnow()
-
                 if now.hour == 21 and now.minute < 5:
                     today = now.date()
-
                     if self._last_report_date != today:
                         try:
                             acct = self.execution.get_account() or {}
@@ -111,17 +108,15 @@ class TradingEngine:
 
                             send_report(state)
                             logger.info("Daily email report sent")
-
                             self._last_report_date = today
 
                         except Exception as e:
                             logger.error(f"Email report failed: {e}")
 
-                # Kill switch
                 if kill_switch_active():
-                    logger.warning("Kill switch active - STOP_TRADING file detected (no new trades)")
+                    logger.warning("Kill switch active - STOP_TRADING file detected")
                     self._print_dashboard()
-                    time.sleep(min(polling_seconds, 60))
+                    time.sleep(60)
                     continue
 
                 if not is_market_open():
@@ -148,9 +143,61 @@ class TradingEngine:
                 time.sleep(max(0.0, polling_seconds - elapsed))
 
         except KeyboardInterrupt:
-            logger.info("Shutdown requested (Ctrl+C)")
+            logger.info("Shutdown requested")
         finally:
-            try:
-                self.db.close()
-            except Exception:
-                pass
+            self.db.close()
+
+    def _trading_cycle(self, timeframe: str):
+        bars_data = self.data_feed.get_multi_bars(self.symbols, timeframe, limit=300)
+
+        signals = []
+
+        for symbol in self.symbols:
+            bars = bars_data.get(symbol)
+            if bars is None:
+                continue
+
+            features = extract_features(bars)
+            if features is None:
+                continue
+
+            signal = self.scorer.evaluate_entry(symbol, features, None)
+            if signal:
+                signals.append((signal, features, bars))
+
+        if not signals:
+            return
+
+        can_trade, _ = self.risk.can_trade()
+        if not can_trade:
+            return
+
+        signals.sort(key=lambda x: x[0].score, reverse=True)
+        signal, features, bars = signals[0]
+
+        last_price = float(bars["close"].iloc[-1])
+        atr = float(features["atr14"].iloc[-1]) if "atr14" in features.columns else 0
+
+        qty, _ = self.risk.calculate_position_size(last_price, atr, 0.5)
+
+        if qty <= 0:
+            return
+
+        try:
+            self.portfolio.open_position(
+                symbol=signal.symbol,
+                side=signal.side,
+                qty=qty,
+                price=last_price,
+                cluster_id=getattr(signal, "cluster_id", None),
+            )
+            self.risk.record_trade(signal.symbol)
+        except Exception as e:
+            logger.error(f"Trade failed: {e}")
+
+    def _print_dashboard(self):
+        try:
+            acct = self.execution.get_account() or {}
+            print(f"Equity: {acct.get('equity')} | Cash: {acct.get('cash')}")
+        except Exception:
+            pass
