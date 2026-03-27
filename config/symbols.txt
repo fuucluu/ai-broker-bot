@@ -1,10 +1,34 @@
+# Core Market (regime detection)
+SPY
+QQQ
+DIA
+
+# Big Tech (stable patterns)
 AAPL
 MSFT
 GOOGL
 AMZN
-NVDA
 META
+NVDA
+
+# High Volatility (learning goldmine)
 TSLA
 AMD
-NFLX
+COIN
+PLTR
+SMCI
+
+# Financials (different behavior)
 JPM
+BAC
+GS
+
+# Energy (macro-driven)
+XOM
+CVX
+
+# ETFs (sector + structure patterns)
+XLK
+XLF
+XLE
+ARKK

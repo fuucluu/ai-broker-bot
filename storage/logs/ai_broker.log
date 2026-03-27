@@ -14085,3 +14085,534 @@
 2026-02-04 16:48:14,821 | INFO     | ai_broker.runtime | Market closed. Status: CLOSED (opens in 16h 41m) (opens in 16:41:45.178766)
 2026-02-04 16:49:14,822 | INFO     | ai_broker.runtime | Market closed. Status: CLOSED (opens in 16h 40m) (opens in 16:40:45.177083)
 2026-02-04 16:50:07,618 | INFO     | ai_broker.runtime | Shutdown requested (Ctrl+C)
+2026-02-05 10:57:29,761 | INFO     | ai_broker.execution | ExecutionEngine initialized - PAPER MODE ONLY
+2026-02-05 10:57:30,331 | INFO     | ai_broker.patterns | Loaded model with 1355 samples
+2026-02-05 10:57:30,331 | INFO     | ai_broker.news | News intelligence disabled
+2026-02-05 10:57:30,369 | INFO     | ai_broker.execution | Reconciled 1 broker positions
+2026-02-05 10:57:30,369 | INFO     | ai_broker.runtime | TradingEngine initialized with 10 symbols
+2026-02-05 10:57:30,369 | INFO     | ai_broker.runtime | Starting main loop...
+2026-02-05 10:57:31,013 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=3 score=0.60 exp=0.0000
+2026-02-05 10:57:31,721 | INFO     | ai_broker.patterns | Trained model on 1356 samples
+2026-02-05 10:57:31,722 | INFO     | ai_broker.runtime | Pattern model trained/retrained
+2026-02-05 10:57:31,758 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 10:58:00,540 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=3 score=0.60 exp=0.0000
+2026-02-05 10:58:00,580 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 10:58:30,566 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=3 score=0.60 exp=0.0000
+2026-02-05 10:58:30,602 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 10:59:00,523 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=3 score=0.60 exp=0.0000
+2026-02-05 10:59:00,560 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 10:59:30,544 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=3 score=0.60 exp=0.0000
+2026-02-05 10:59:30,597 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:00:00,527 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=3 score=0.55 exp=0.0000
+2026-02-05 11:00:00,568 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:00:30,556 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=3 score=0.55 exp=0.0000
+2026-02-05 11:00:30,618 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:01:00,577 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=3 score=0.55 exp=0.0000
+2026-02-05 11:01:00,614 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:01:30,540 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=3 score=0.55 exp=0.0000
+2026-02-05 11:01:30,580 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:02:00,578 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=3 score=0.55 exp=0.0000
+2026-02-05 11:02:00,645 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:02:30,510 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=3 score=0.55 exp=0.0000
+2026-02-05 11:02:30,547 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:03:00,546 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=3 score=0.55 exp=0.0000
+2026-02-05 11:03:00,587 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:03:30,572 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=3 score=0.55 exp=0.0000
+2026-02-05 11:03:30,609 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:04:00,545 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=3 score=0.55 exp=0.0000
+2026-02-05 11:04:00,618 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:04:30,557 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=3 score=0.55 exp=0.0000
+2026-02-05 11:04:30,593 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:05:00,537 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=3 score=0.60 exp=0.0000
+2026-02-05 11:05:00,592 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:05:30,502 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=3 score=0.60 exp=0.0000
+2026-02-05 11:05:30,538 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:06:00,526 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=3 score=0.60 exp=0.0000
+2026-02-05 11:06:00,564 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:06:30,507 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=3 score=0.60 exp=0.0000
+2026-02-05 11:06:30,544 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:07:00,506 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=3 score=0.60 exp=0.0000
+2026-02-05 11:07:00,547 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:07:30,524 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=3 score=0.60 exp=0.0000
+2026-02-05 11:07:30,561 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:08:00,560 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=3 score=0.60 exp=0.0000
+2026-02-05 11:08:00,603 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:08:30,561 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=3 score=0.60 exp=0.0000
+2026-02-05 11:08:30,602 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:09:00,523 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=3 score=0.60 exp=0.0000
+2026-02-05 11:09:00,560 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:09:30,521 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=3 score=0.60 exp=0.0000
+2026-02-05 11:09:30,561 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:10:00,780 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=3 score=0.60 exp=0.0000
+2026-02-05 11:10:00,858 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:10:30,531 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=3 score=0.60 exp=0.0000
+2026-02-05 11:10:30,578 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:11:00,518 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=3 score=0.60 exp=0.0000
+2026-02-05 11:11:00,555 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:11:30,617 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=3 score=0.60 exp=0.0000
+2026-02-05 11:11:30,656 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:12:00,586 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=3 score=0.60 exp=0.0000
+2026-02-05 11:12:00,628 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:12:30,509 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=3 score=0.60 exp=0.0000
+2026-02-05 11:12:30,551 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:13:00,522 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=3 score=0.60 exp=0.0000
+2026-02-05 11:13:00,562 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:13:30,505 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=3 score=0.60 exp=0.0000
+2026-02-05 11:13:30,543 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:14:00,513 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=3 score=0.60 exp=0.0000
+2026-02-05 11:14:00,550 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:14:30,510 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=3 score=0.60 exp=0.0000
+2026-02-05 11:14:30,548 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:15:00,586 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=3 score=0.60 exp=0.0000
+2026-02-05 11:15:00,628 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:15:30,515 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=3 score=0.60 exp=0.0000
+2026-02-05 11:15:30,562 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:16:00,559 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=3 score=0.60 exp=0.0000
+2026-02-05 11:16:00,618 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:16:30,573 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=3 score=0.60 exp=0.0000
+2026-02-05 11:16:30,616 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:17:00,536 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=3 score=0.60 exp=0.0000
+2026-02-05 11:17:00,579 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:17:30,515 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=3 score=0.60 exp=0.0000
+2026-02-05 11:17:30,556 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:18:00,521 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=3 score=0.60 exp=0.0000
+2026-02-05 11:18:00,568 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:18:30,545 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=3 score=0.60 exp=0.0000
+2026-02-05 11:18:30,595 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:19:00,546 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=3 score=0.60 exp=0.0000
+2026-02-05 11:19:00,585 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:19:30,521 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=3 score=0.60 exp=0.0000
+2026-02-05 11:19:30,570 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:20:00,537 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=3 score=0.60 exp=0.0000
+2026-02-05 11:20:00,578 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:20:30,562 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=3 score=0.60 exp=0.0000
+2026-02-05 11:20:30,600 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:21:01,029 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=3 score=0.60 exp=0.0000
+2026-02-05 11:21:01,274 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:21:30,520 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=3 score=0.60 exp=0.0000
+2026-02-05 11:21:30,556 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:22:00,538 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=3 score=0.60 exp=0.0000
+2026-02-05 11:22:00,579 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:22:30,520 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=3 score=0.60 exp=0.0000
+2026-02-05 11:22:30,559 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:23:00,536 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=3 score=0.60 exp=0.0000
+2026-02-05 11:23:00,620 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:23:30,516 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=3 score=0.60 exp=0.0000
+2026-02-05 11:23:30,553 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:24:00,523 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=3 score=0.60 exp=0.0000
+2026-02-05 11:24:00,559 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:24:30,509 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=3 score=0.60 exp=0.0000
+2026-02-05 11:24:30,544 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:25:00,533 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=3 score=0.60 exp=0.0000
+2026-02-05 11:25:00,572 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:25:30,532 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=3 score=0.60 exp=0.0000
+2026-02-05 11:25:30,588 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:26:00,516 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=3 score=0.60 exp=0.0000
+2026-02-05 11:26:00,553 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:26:30,530 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=3 score=0.60 exp=0.0000
+2026-02-05 11:26:30,568 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:27:00,564 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=3 score=0.60 exp=0.0000
+2026-02-05 11:27:00,600 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:27:30,533 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=3 score=0.60 exp=0.0000
+2026-02-05 11:27:30,574 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:28:00,544 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=3 score=0.60 exp=0.0000
+2026-02-05 11:28:00,581 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:28:30,540 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=3 score=0.60 exp=0.0000
+2026-02-05 11:28:30,580 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:29:00,550 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=3 score=0.60 exp=0.0000
+2026-02-05 11:29:00,589 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:29:30,521 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=3 score=0.60 exp=0.0000
+2026-02-05 11:29:30,559 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:30:00,525 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=3 score=0.60 exp=0.0000
+2026-02-05 11:30:00,562 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:30:30,720 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=3 score=0.60 exp=0.0000
+2026-02-05 11:30:30,765 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:31:00,527 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=3 score=0.60 exp=0.0000
+2026-02-05 11:31:00,563 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:31:30,548 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=3 score=0.60 exp=0.0000
+2026-02-05 11:31:30,586 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:32:00,596 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=3 score=0.60 exp=0.0000
+2026-02-05 11:32:00,640 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:32:30,547 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=3 score=0.60 exp=0.0000
+2026-02-05 11:32:30,586 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:33:00,535 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=3 score=0.60 exp=0.0000
+2026-02-05 11:33:00,577 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:33:30,529 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=3 score=0.60 exp=0.0000
+2026-02-05 11:33:30,567 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:34:00,573 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=3 score=0.60 exp=0.0000
+2026-02-05 11:34:00,636 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:34:30,565 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=3 score=0.60 exp=0.0000
+2026-02-05 11:34:30,609 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:35:00,583 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=5 score=0.50 exp=0.0000
+2026-02-05 11:35:00,628 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:35:30,644 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=5 score=0.50 exp=0.0000
+2026-02-05 11:35:30,690 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:36:00,614 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=5 score=0.50 exp=0.0000
+2026-02-05 11:36:00,680 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:36:30,583 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=5 score=0.50 exp=0.0000
+2026-02-05 11:36:30,635 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:37:00,555 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=5 score=0.50 exp=0.0000
+2026-02-05 11:37:00,603 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:37:30,588 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=5 score=0.50 exp=0.0000
+2026-02-05 11:37:30,657 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:38:00,550 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=5 score=0.50 exp=0.0000
+2026-02-05 11:38:00,588 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:38:30,545 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=5 score=0.50 exp=0.0000
+2026-02-05 11:38:30,579 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:39:00,564 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=5 score=0.50 exp=0.0000
+2026-02-05 11:39:00,650 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:39:30,539 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=5 score=0.50 exp=0.0000
+2026-02-05 11:39:30,577 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:40:00,564 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=5 score=0.50 exp=0.0000
+2026-02-05 11:40:00,604 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:40:30,551 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=5 score=0.50 exp=0.0000
+2026-02-05 11:40:30,597 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:41:00,529 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=5 score=0.50 exp=0.0000
+2026-02-05 11:41:00,572 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:41:30,545 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=5 score=0.50 exp=0.0000
+2026-02-05 11:41:30,593 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:42:00,577 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=5 score=0.50 exp=0.0000
+2026-02-05 11:42:00,616 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:42:30,557 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=5 score=0.50 exp=0.0000
+2026-02-05 11:42:30,600 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:43:00,947 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=5 score=0.50 exp=0.0000
+2026-02-05 11:43:01,160 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:43:30,701 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=5 score=0.50 exp=0.0000
+2026-02-05 11:43:30,762 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:44:01,004 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=5 score=0.50 exp=0.0000
+2026-02-05 11:44:01,511 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:44:30,647 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=5 score=0.50 exp=0.0000
+2026-02-05 11:44:30,728 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:45:00,576 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=8 score=0.55 exp=0.0000
+2026-02-05 11:45:00,619 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:45:30,554 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=8 score=0.55 exp=0.0000
+2026-02-05 11:45:30,597 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:46:06,188 | ERROR    | ai_broker.execution | Failed to get account: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2026-02-05 11:46:06,283 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=8 score=0.55 exp=0.0000
+2026-02-05 11:46:06,874 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:46:30,572 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=8 score=0.55 exp=0.0000
+2026-02-05 11:46:30,625 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:47:00,569 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=8 score=0.55 exp=0.0000
+2026-02-05 11:47:00,620 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:47:30,550 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=8 score=0.55 exp=0.0000
+2026-02-05 11:47:30,604 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:48:00,564 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=8 score=0.55 exp=0.0000
+2026-02-05 11:48:00,618 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:48:30,561 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=8 score=0.55 exp=0.0000
+2026-02-05 11:48:30,616 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:49:00,645 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=8 score=0.55 exp=0.0000
+2026-02-05 11:49:00,700 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:49:30,578 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=8 score=0.55 exp=0.0000
+2026-02-05 11:49:30,637 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:50:00,570 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=7 score=0.55 exp=0.0000
+2026-02-05 11:50:00,619 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:50:30,563 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=7 score=0.55 exp=0.0000
+2026-02-05 11:50:30,608 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:51:00,560 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=7 score=0.55 exp=0.0000
+2026-02-05 11:51:00,620 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:51:30,561 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=7 score=0.55 exp=0.0000
+2026-02-05 11:51:30,615 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:52:00,593 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=7 score=0.55 exp=0.0000
+2026-02-05 11:52:00,642 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:52:30,573 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=7 score=0.55 exp=0.0000
+2026-02-05 11:52:30,625 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:53:00,563 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=7 score=0.55 exp=0.0000
+2026-02-05 11:53:00,612 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:53:30,630 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=7 score=0.55 exp=0.0000
+2026-02-05 11:53:30,739 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:54:00,559 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=7 score=0.55 exp=0.0000
+2026-02-05 11:54:00,607 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:54:30,679 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=7 score=0.55 exp=0.0000
+2026-02-05 11:54:30,745 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:55:00,579 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=8 score=0.55 exp=0.0000
+2026-02-05 11:55:00,653 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:55:30,595 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=8 score=0.55 exp=0.0000
+2026-02-05 11:55:30,646 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:56:00,595 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=8 score=0.55 exp=0.0000
+2026-02-05 11:56:00,645 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:56:30,577 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=8 score=0.55 exp=0.0000
+2026-02-05 11:56:30,625 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:57:00,568 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=8 score=0.55 exp=0.0000
+2026-02-05 11:57:00,618 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:57:30,559 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=8 score=0.55 exp=0.0000
+2026-02-05 11:57:30,606 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:58:00,568 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=8 score=0.55 exp=0.0000
+2026-02-05 11:58:00,616 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:58:30,961 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=8 score=0.55 exp=0.0000
+2026-02-05 11:58:31,009 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:59:00,573 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=8 score=0.55 exp=0.0000
+2026-02-05 11:59:00,626 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 11:59:30,598 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=8 score=0.55 exp=0.0000
+2026-02-05 11:59:30,648 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:00:00,659 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=8 score=0.55 exp=0.0000
+2026-02-05 12:00:00,709 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:00:30,562 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=8 score=0.55 exp=0.0000
+2026-02-05 12:00:30,611 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:01:00,715 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=8 score=0.55 exp=0.0000
+2026-02-05 12:01:00,762 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:01:30,643 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=8 score=0.55 exp=0.0000
+2026-02-05 12:01:30,710 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:02:00,652 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=8 score=0.55 exp=0.0000
+2026-02-05 12:02:00,700 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:02:30,634 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=8 score=0.55 exp=0.0000
+2026-02-05 12:02:30,684 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:03:00,609 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=8 score=0.55 exp=0.0000
+2026-02-05 12:03:00,663 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:03:30,578 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=8 score=0.55 exp=0.0000
+2026-02-05 12:03:30,633 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:04:00,687 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=8 score=0.55 exp=0.0000
+2026-02-05 12:04:00,739 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:04:30,618 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=8 score=0.55 exp=0.0000
+2026-02-05 12:04:30,668 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:05:00,637 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=4 score=0.55 exp=0.0000
+2026-02-05 12:05:00,685 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:05:30,573 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=4 score=0.55 exp=0.0000
+2026-02-05 12:05:30,639 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:06:00,591 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=4 score=0.55 exp=0.0000
+2026-02-05 12:06:00,641 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:06:30,591 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=4 score=0.55 exp=0.0000
+2026-02-05 12:06:30,643 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:07:00,614 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=4 score=0.55 exp=0.0000
+2026-02-05 12:07:00,672 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:07:30,575 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=4 score=0.55 exp=0.0000
+2026-02-05 12:07:30,624 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:08:00,608 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=4 score=0.55 exp=0.0000
+2026-02-05 12:08:00,658 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:08:30,592 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=4 score=0.55 exp=0.0000
+2026-02-05 12:08:30,642 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:09:00,690 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=4 score=0.55 exp=0.0000
+2026-02-05 12:09:00,740 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:09:30,590 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=4 score=0.55 exp=0.0000
+2026-02-05 12:09:30,646 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:10:00,659 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=4 score=0.55 exp=0.0000
+2026-02-05 12:10:00,710 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:10:30,625 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=4 score=0.55 exp=0.0000
+2026-02-05 12:10:30,673 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:11:00,595 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=4 score=0.55 exp=0.0000
+2026-02-05 12:11:00,642 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:11:30,592 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=4 score=0.55 exp=0.0000
+2026-02-05 12:11:30,668 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:12:00,584 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=4 score=0.55 exp=0.0000
+2026-02-05 12:12:00,637 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:12:30,595 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=4 score=0.55 exp=0.0000
+2026-02-05 12:12:30,644 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:13:00,624 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=4 score=0.55 exp=0.0000
+2026-02-05 12:13:00,675 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:13:30,629 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=4 score=0.55 exp=0.0000
+2026-02-05 12:13:30,679 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:14:00,598 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=4 score=0.55 exp=0.0000
+2026-02-05 12:14:00,646 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:14:30,576 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=4 score=0.55 exp=0.0000
+2026-02-05 12:14:30,625 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:15:00,689 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=7 score=0.55 exp=0.0000
+2026-02-05 12:15:00,776 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:15:30,603 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=7 score=0.55 exp=0.0000
+2026-02-05 12:15:30,667 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:16:00,606 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=7 score=0.55 exp=0.0000
+2026-02-05 12:16:00,669 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:16:30,609 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=7 score=0.55 exp=0.0000
+2026-02-05 12:16:30,667 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:17:00,598 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=7 score=0.55 exp=0.0000
+2026-02-05 12:17:00,647 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:17:30,605 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=7 score=0.55 exp=0.0000
+2026-02-05 12:17:30,660 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:18:00,614 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=7 score=0.55 exp=0.0000
+2026-02-05 12:18:00,662 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:18:30,579 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=7 score=0.55 exp=0.0000
+2026-02-05 12:18:30,633 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:19:00,595 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=7 score=0.55 exp=0.0000
+2026-02-05 12:19:00,652 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:19:30,598 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=7 score=0.55 exp=0.0000
+2026-02-05 12:19:30,646 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:20:00,676 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=4 score=0.50 exp=0.0000
+2026-02-05 12:20:00,731 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:20:30,606 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=4 score=0.50 exp=0.0000
+2026-02-05 12:20:30,658 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:21:00,718 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=4 score=0.50 exp=0.0000
+2026-02-05 12:21:00,792 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:21:30,580 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=4 score=0.50 exp=0.0000
+2026-02-05 12:21:30,629 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:22:00,608 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=4 score=0.50 exp=0.0000
+2026-02-05 12:22:00,661 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:22:30,607 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=4 score=0.50 exp=0.0000
+2026-02-05 12:22:30,655 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:23:00,586 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=4 score=0.50 exp=0.0000
+2026-02-05 12:23:00,636 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:23:30,612 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=4 score=0.50 exp=0.0000
+2026-02-05 12:23:30,664 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:24:00,788 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=4 score=0.50 exp=0.0000
+2026-02-05 12:24:00,841 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:24:30,605 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=4 score=0.50 exp=0.0000
+2026-02-05 12:24:30,683 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:25:00,605 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=7 score=0.55 exp=0.0000
+2026-02-05 12:25:00,657 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:25:30,603 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=7 score=0.55 exp=0.0000
+2026-02-05 12:25:30,709 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:26:00,618 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=7 score=0.55 exp=0.0000
+2026-02-05 12:26:00,673 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:26:30,603 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=7 score=0.55 exp=0.0000
+2026-02-05 12:26:30,653 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:27:00,635 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=7 score=0.55 exp=0.0000
+2026-02-05 12:27:00,685 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:27:30,604 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=7 score=0.55 exp=0.0000
+2026-02-05 12:27:30,654 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:28:00,601 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=7 score=0.55 exp=0.0000
+2026-02-05 12:28:00,648 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:28:30,617 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=7 score=0.55 exp=0.0000
+2026-02-05 12:28:30,681 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:29:00,872 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=7 score=0.55 exp=0.0000
+2026-02-05 12:29:00,919 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:29:30,599 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=7 score=0.55 exp=0.0000
+2026-02-05 12:29:30,652 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:30:00,630 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=7 score=0.55 exp=0.0000
+2026-02-05 12:30:00,682 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:30:30,614 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=7 score=0.55 exp=0.0000
+2026-02-05 12:30:30,663 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:31:00,627 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=7 score=0.55 exp=0.0000
+2026-02-05 12:31:00,678 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:31:30,608 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=7 score=0.55 exp=0.0000
+2026-02-05 12:31:30,661 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:32:00,614 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=7 score=0.55 exp=0.0000
+2026-02-05 12:32:00,663 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:32:30,591 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=7 score=0.55 exp=0.0000
+2026-02-05 12:32:30,641 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:33:00,623 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=7 score=0.55 exp=0.0000
+2026-02-05 12:33:00,676 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:33:30,616 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=7 score=0.55 exp=0.0000
+2026-02-05 12:33:30,664 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:34:00,628 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=7 score=0.55 exp=0.0000
+2026-02-05 12:34:00,682 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:34:30,623 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=7 score=0.55 exp=0.0000
+2026-02-05 12:34:30,686 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:40:00,716 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=5 score=0.55 exp=0.0000
+2026-02-05 12:40:00,864 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:40:30,651 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=5 score=0.55 exp=0.0000
+2026-02-05 12:40:30,697 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:41:00,626 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=5 score=0.55 exp=0.0000
+2026-02-05 12:41:00,675 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:41:30,693 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=5 score=0.55 exp=0.0000
+2026-02-05 12:41:30,747 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:42:00,711 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=5 score=0.55 exp=0.0000
+2026-02-05 12:42:00,764 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:42:30,686 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=5 score=0.55 exp=0.0000
+2026-02-05 12:42:30,768 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:43:00,884 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=5 score=0.55 exp=0.0000
+2026-02-05 12:43:00,954 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:43:30,815 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=5 score=0.55 exp=0.0000
+2026-02-05 12:43:30,905 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:44:00,630 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=5 score=0.55 exp=0.0000
+2026-02-05 12:44:00,682 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:44:30,612 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=5 score=0.55 exp=0.0000
+2026-02-05 12:44:30,660 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:45:00,744 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=5 score=0.55 exp=0.0000
+2026-02-05 12:45:00,803 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:45:30,606 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=5 score=0.55 exp=0.0000
+2026-02-05 12:45:30,653 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:46:00,621 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=5 score=0.55 exp=0.0000
+2026-02-05 12:46:00,671 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:46:30,615 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=5 score=0.55 exp=0.0000
+2026-02-05 12:46:30,990 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:47:00,620 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=5 score=0.55 exp=0.0000
+2026-02-05 12:47:00,676 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:47:30,625 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=5 score=0.55 exp=0.0000
+2026-02-05 12:47:30,673 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:48:00,743 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=5 score=0.55 exp=0.0000
+2026-02-05 12:48:00,792 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:48:30,615 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=5 score=0.55 exp=0.0000
+2026-02-05 12:48:30,663 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:49:00,766 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=5 score=0.55 exp=0.0000
+2026-02-05 12:49:00,822 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:49:30,626 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=5 score=0.55 exp=0.0000
+2026-02-05 12:49:30,675 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:50:00,727 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=5 score=0.55 exp=0.0000
+2026-02-05 12:50:00,776 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:50:30,631 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=5 score=0.55 exp=0.0000
+2026-02-05 12:50:30,685 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:51:00,657 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=5 score=0.55 exp=0.0000
+2026-02-05 12:51:00,739 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:51:30,621 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=5 score=0.55 exp=0.0000
+2026-02-05 12:51:30,673 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:52:00,626 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=5 score=0.55 exp=0.0000
+2026-02-05 12:52:00,673 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:52:30,627 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=5 score=0.55 exp=0.0000
+2026-02-05 12:52:30,674 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:53:00,630 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=5 score=0.55 exp=0.0000
+2026-02-05 12:53:00,683 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:53:30,616 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=5 score=0.55 exp=0.0000
+2026-02-05 12:53:30,676 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:54:00,634 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=5 score=0.55 exp=0.0000
+2026-02-05 12:54:00,687 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:54:30,619 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=5 score=0.55 exp=0.0000
+2026-02-05 12:54:30,667 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:55:00,651 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=8 score=0.55 exp=0.0000
+2026-02-05 12:55:00,709 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:55:30,627 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=8 score=0.55 exp=0.0000
+2026-02-05 12:55:30,675 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:56:00,629 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=8 score=0.55 exp=0.0000
+2026-02-05 12:56:00,681 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:56:30,627 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=8 score=0.55 exp=0.0000
+2026-02-05 12:56:30,678 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:57:00,652 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=8 score=0.55 exp=0.0000
+2026-02-05 12:57:00,707 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:57:30,652 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=8 score=0.55 exp=0.0000
+2026-02-05 12:57:30,709 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:58:00,653 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=8 score=0.55 exp=0.0000
+2026-02-05 12:58:00,714 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:58:30,725 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=8 score=0.55 exp=0.0000
+2026-02-05 12:58:30,772 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:59:00,664 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=8 score=0.55 exp=0.0000
+2026-02-05 12:59:00,714 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 12:59:31,015 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=8 score=0.55 exp=0.0000
+2026-02-05 12:59:31,064 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 13:00:00,721 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=8 score=0.55 exp=0.0000
+2026-02-05 13:00:00,778 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 13:00:30,736 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=8 score=0.55 exp=0.0000
+2026-02-05 13:00:30,786 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 13:01:00,729 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=8 score=0.55 exp=0.0000
+2026-02-05 13:01:00,775 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 13:01:30,666 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=8 score=0.55 exp=0.0000
+2026-02-05 13:01:30,715 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 13:02:00,756 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=8 score=0.55 exp=0.0000
+2026-02-05 13:02:00,826 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 13:02:30,687 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=8 score=0.55 exp=0.0000
+2026-02-05 13:02:30,740 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 13:03:00,738 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=8 score=0.55 exp=0.0000
+2026-02-05 13:03:00,815 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 13:03:30,672 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=8 score=0.55 exp=0.0000
+2026-02-05 13:03:30,745 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 13:04:00,691 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=8 score=0.55 exp=0.0000
+2026-02-05 13:04:00,741 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 13:04:30,686 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=8 score=0.55 exp=0.0000
+2026-02-05 13:04:30,731 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 13:05:00,681 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=4 score=0.55 exp=0.0000
+2026-02-05 13:05:00,732 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 13:05:30,692 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=4 score=0.55 exp=0.0000
+2026-02-05 13:05:30,740 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 13:06:00,744 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=4 score=0.55 exp=0.0000
+2026-02-05 13:06:00,792 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 13:06:30,687 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=4 score=0.55 exp=0.0000
+2026-02-05 13:06:30,734 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 13:07:00,685 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=4 score=0.55 exp=0.0000
+2026-02-05 13:07:00,737 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 13:07:30,641 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=4 score=0.55 exp=0.0000
+2026-02-05 13:07:30,695 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 13:08:00,643 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=4 score=0.55 exp=0.0000
+2026-02-05 13:08:00,690 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 13:08:30,729 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=4 score=0.55 exp=0.0000
+2026-02-05 13:08:30,776 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 13:09:00,651 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=4 score=0.55 exp=0.0000
+2026-02-05 13:09:00,703 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 13:09:30,664 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=4 score=0.55 exp=0.0000
+2026-02-05 13:09:30,719 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 13:10:00,684 | INFO     | ai_broker.scorer | [EXPLORATORY] AAPL cluster=7 score=0.55 exp=0.0000
+2026-02-05 13:10:00,734 | INFO     | ai_broker.runtime | AAPL blocked: Already have position in AAPL
+2026-02-05 13:10:20,633 | INFO     | ai_broker.runtime | Shutdown requested (Ctrl+C)
+2026-03-26 22:46:18,655 | INFO     | ai_broker.execution | ExecutionEngine initialized - PAPER MODE ONLY
+2026-03-26 22:46:19,219 | INFO     | ai_broker.patterns | Loaded model with 1356 samples
+2026-03-26 22:46:19,219 | INFO     | ai_broker.news | News intelligence disabled
+2026-03-26 22:46:19,264 | INFO     | ai_broker.execution | Reconciled 1 broker positions
+2026-03-26 22:46:19,264 | INFO     | ai_broker.runtime | TradingEngine initialized with 10 symbols
+2026-03-26 22:46:19,264 | INFO     | ai_broker.runtime | Starting main loop...
+2026-03-26 22:46:21,498 | INFO     | ai_broker.runtime | Daily email report sent
+2026-03-26 22:46:21,500 | INFO     | ai_broker.runtime | Market closed. Status: CLOSED (opens in 10h 43m) (opens in 10:43:38.500058)
+2026-03-26 22:46:54,525 | INFO     | ai_broker.runtime | Shutdown requested (Ctrl+C)

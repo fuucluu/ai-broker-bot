@@ -1,7 +1,7 @@
 trading:
   timeframe: "5Min"
   polling_seconds: 30
-  max_symbols: 10
+  max_symbols: 15
   always_include: ["SPY"]
 
 risk:
