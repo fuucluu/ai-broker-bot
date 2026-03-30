@@ -1,7 +1,7 @@
 import requests
 
 def send_report(state):
-    api_key = "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"
+    api_key = "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"
 
     url = "https://api.sendgrid.com/v3/mail/send"
 
