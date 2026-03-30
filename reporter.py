@@ -1,53 +1,47 @@
 import smtplib
+import time
 from email.mime.text import MIMEText
-from datetime import datetime
+
 
 def send_report(state):
-    sender_email = "james.diedrich.23@gmail.com"
-    receiver_email = "james.diedrich.23@gmail.com"
-    app_password = "oxfzwfrvzzecormj"
+    sender = "james.diedrich.23@gmail.com"
+    password = "oxfzwfrvzzecormj"
+    receiver = "james.diedrich.23@gmail.com"
 
-    subject = "AI Broker Daily Report"
+    subject = "📊 AI Broker Daily Report"
 
     body = f"""
-AI BROKER REPORT
-Time (UTC): {datetime.utcnow()}
-
------------------------------
-ACCOUNT
------------------------------
 Equity: {state['equity']}
 Cash: {state['cash']}
 Daily PnL: {state['daily_pnl']}
 
------------------------------
-MODEL
------------------------------
 Samples: {state['samples']}
 Clusters: {state['clusters']}
 Last Train: {state['last_train']}
 
------------------------------
-RISK
------------------------------
 Trades Today: {state['trades_today']} / {state['max_trades']}
 Open Positions: {state['open_positions']}
-Loss Used: {state['loss_pct_used']:.2f}%
-
------------------------------
-STATUS: OK
------------------------------
+Loss Used: {state['loss_pct_used']}%
 """
 
     msg = MIMEText(body)
     msg["Subject"] = subject
-    msg["From"] = sender_email
-    msg["To"] = receiver_email
+    msg["From"] = sender
+    msg["To"] = receiver
 
-    try:
-        with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
-            server.login(sender_email, app_password)
-            server.send_message(msg)
-        print("Email sent successfully.")
-    except Exception as e:
-        print("Email failed:", e)
+    # 🔥 RETRY SYSTEM
+    for attempt in range(3):
+        try:
+            with smtplib.SMTP("smtp.gmail.com", 587, timeout=10) as server:
+                server.starttls()
+                server.login(sender, password)
+                server.send_message(msg)
+
+            print("✅ Email sent successfully")
+            return
+
+        except Exception as e:
+            print(f"❌ Email attempt {attempt+1} failed: {e}")
+            time.sleep(5)
+
+    print("🚨 Email FAILED after retries")
