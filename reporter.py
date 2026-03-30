@@ -1,7 +1,13 @@
+import os
 import requests
 
 def send_report(state):
-    api_key = "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"
+    # Retrieve the key from your system environment instead of hardcoding
+    api_key = os.getenv("SENDGRID_API_KEY") 
+    
+    if not api_key:
+        print("🚨 Error: SENDGRID_API_KEY not found in environment variables")
+        return
 
     url = "https://api.sendgrid.com/v3/mail/send"
 
