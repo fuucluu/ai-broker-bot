@@ -1,16 +1,13 @@
-import smtplib
-import time
-from email.mime.text import MIMEText
-
+import requests
 
 def send_report(state):
-    sender = "james.diedrich.23@gmail.com"
-    password = "oxfzwfrvzzecormj"
-    receiver = "james.diedrich.23@gmail.com"
+    api_key = "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"
 
-    subject = "📊 AI Broker Daily Report"
+    url = "https://api.sendgrid.com/v3/mail/send"
 
     body = f"""
+AI Broker Daily Report
+
 Equity: {state['equity']}
 Cash: {state['cash']}
 Daily PnL: {state['daily_pnl']}
@@ -24,24 +21,34 @@ Open Positions: {state['open_positions']}
 Loss Used: {state['loss_pct_used']}%
 """
 
-    msg = MIMEText(body)
-    msg["Subject"] = subject
-    msg["From"] = sender
-    msg["To"] = receiver
+    data = {
+        "personalizations": [
+            {
+                "to": [{"email": "james.diedrich.23@gmail.com"}],
+                "subject": "📊 AI Broker Daily Report"
+            }
+        ],
+        "from": {"email": "james.diedrich.23@gmail.com"},
+        "content": [
+            {
+                "type": "text/plain",
+                "value": body
+            }
+        ]
+    }
 
-    # 🔥 RETRY SYSTEM
-    for attempt in range(3):
-        try:
-            with smtplib.SMTP("smtp.gmail.com", 587, timeout=10) as server:
-                server.starttls()
-                server.login(sender, password)
-                server.send_message(msg)
+    headers = {
+        "Authorization": f"Bearer {api_key}",
+        "Content-Type": "application/json"
+    }
 
-            print("✅ Email sent successfully")
-            return
+    try:
+        response = requests.post(url, json=data, headers=headers)
 
-        except Exception as e:
-            print(f"❌ Email attempt {attempt+1} failed: {e}")
-            time.sleep(5)
+        if response.status_code == 202:
+            print("✅ Email sent via SendGrid")
+        else:
+            print(f"❌ SendGrid failed: {response.text}")
 
-    print("🚨 Email FAILED after retries")
+    except Exception as e:
+        print(f"🚨 SendGrid error: {e}")
