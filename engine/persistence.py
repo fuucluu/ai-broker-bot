@@ -11,7 +11,7 @@ logger = logging.getLogger("ai_broker.persistence")
 class Database:
     def __init__(self, db_path: str = "ai_broker.db"):
         self.db_path = db_path
-        self._lock = threading.Lock()
+        self._lock = threading.RLock()
         self.conn = sqlite3.connect(self.db_path, check_same_thread=False)
         self.conn.row_factory = sqlite3.Row
         self._initialize_schema()
@@ -110,12 +110,12 @@ class Database:
                 SELECT *
                 FROM trades
                 WHERE exit_price IS NULL
+                ORDER BY timestamp ASC
                 """
             )
             return [dict(row) for row in cur.fetchall()]
 
     def get_position_by_symbol(self, symbol: str) -> Optional[Dict]:
-        """Return open position for symbol, or None."""
         with self._lock:
             cur = self.conn.cursor()
             cur.execute(
@@ -277,6 +277,25 @@ class Database:
                 self.update_cluster_stats(cluster_id, pnl)
 
             self.conn.commit()
+
+    def force_close_all_open_trades(
+        self,
+        exit_price: float = 0.0,
+        pnl: float = 0.0,
+    ) -> int:
+        with self._lock:
+            cur = self.conn.cursor()
+            cur.execute(
+                """
+                UPDATE trades
+                SET exit_price = ?, pnl = ?
+                WHERE exit_price IS NULL
+                """,
+                (exit_price, pnl),
+            )
+            count = cur.rowcount
+            self.conn.commit()
+            return count
 
     # ============================================================
     # SYMBOL STATS

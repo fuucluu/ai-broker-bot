@@ -1,0 +1,15 @@
+# Runtime files
+ai_broker.db
+ai_broker.log
+*.db
+*.log
+
+# Model artifacts
+model/*.pkl
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Storage logs
+storage/logs/

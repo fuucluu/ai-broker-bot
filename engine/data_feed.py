@@ -1,4 +1,5 @@
 """Market data feed using Alpaca API (polling approach)."""
+
 import logging
 from datetime import datetime, timedelta
 from typing import Dict, List, Optional
@@ -25,7 +26,7 @@ class DataFeed:
         self.client = StockHistoricalDataClient(api_key, api_secret)
         self._cache: Dict[str, pd.DataFrame] = {}
         self._last_fetch: Dict[str, datetime] = {}
-        self.feed = (feed or "iex").strip().lower()  # default IEX for free accounts
+        self.feed = (feed or "iex").strip().lower()
 
     def _get_timeframe(self, tf_str: str) -> TimeFrame:
         tf_map = {
@@ -40,8 +41,7 @@ class DataFeed:
     def _get_feed_enum(self):
         if AlpacaDataFeed is None:
             return None
-        # Force IEX for free accounts
-        return AlpacaDataFeed.IEX
+        return AlpacaDataFeed.IEX  # Force IEX for free accounts
 
     def _bars_df_for_symbol(self, bars, symbol: str) -> Optional[pd.DataFrame]:
         df_all = getattr(bars, "df", None)
@@ -63,18 +63,26 @@ class DataFeed:
         df.index.name = "timestamp"
         df = df.sort_index()
 
-        for col in ("open", "high", "low", "close", "volume"):
-            if col not in df.columns:
-                return None
+        required_cols = ("open", "high", "low", "close", "volume")
+        if not all(col in df.columns for col in required_cols):
+            return None
 
         if "vwap" not in df.columns:
             df["vwap"] = df["close"]
 
         df = df[["open", "high", "low", "close", "volume", "vwap"]].copy()
-        df = df.astype({"open": float, "high": float, "low": float, "close": float, "volume": float, "vwap": float})
+        df = df.astype(float)
+
         return df
 
-    def get_bars(self, symbol: str, timeframe: str = "5Min", limit: int = 100, use_cache: bool = True) -> Optional[pd.DataFrame]:
+    def get_bars(
+        self,
+        symbol: str,
+        timeframe: str = "5Min",
+        limit: int = 100,
+        use_cache: bool = True,
+    ) -> Optional[pd.DataFrame]:
+
         cache_key = f"{symbol}_{timeframe}"
         now = datetime.now(NY_TZ)
 
@@ -85,7 +93,7 @@ class DataFeed:
 
         try:
             end = now
-            start = end - timedelta(days=10)
+            start = end - timedelta(days=2)  # 🔥 Reduced for IEX stability
             feed_enum = self._get_feed_enum()
 
             request_args = dict(
@@ -95,11 +103,13 @@ class DataFeed:
                 end=end,
                 limit=limit,
             )
+
             if feed_enum:
                 request_args["feed"] = feed_enum
 
             request = StockBarsRequest(**request_args)
             bars = self.client.get_stock_bars(request)
+
             df = self._bars_df_for_symbol(bars, symbol)
 
             if df is None or df.empty:
@@ -111,17 +121,25 @@ class DataFeed:
 
             self._cache[cache_key] = df
             self._last_fetch[cache_key] = now
+
             return df
 
         except Exception as e:
             logger.error(f"Error fetching bars for {symbol}: {e}")
             return None
 
-    def get_multi_bars(self, symbols: List[str], timeframe: str = "5Min", limit: int = 100) -> Dict[str, pd.DataFrame]:
+    def get_multi_bars(
+        self,
+        symbols: List[str],
+        timeframe: str = "5Min",
+        limit: int = 100,
+    ) -> Dict[str, pd.DataFrame]:
+
         results: Dict[str, pd.DataFrame] = {}
+
         try:
             now = datetime.now(NY_TZ)
-            start = now - timedelta(days=10)
+            start = now - timedelta(days=2)  # 🔥 Reduced for IEX
             feed_enum = self._get_feed_enum()
 
             request_args = dict(
@@ -131,13 +149,14 @@ class DataFeed:
                 end=now,
                 limit=limit,
             )
+
             if feed_enum:
                 request_args["feed"] = feed_enum
 
             request = StockBarsRequest(**request_args)
             bars = self.client.get_stock_bars(request)
-            df_all = getattr(bars, "df", None)
 
+            df_all = getattr(bars, "df", None)
             if df_all is None or df_all.empty:
                 logger.warning("No multi-bar data returned")
                 return {}
@@ -148,32 +167,44 @@ class DataFeed:
                         sdf = df_all.xs(sym, level=0).copy()
                     except Exception:
                         continue
+
                     sdf.index.name = "timestamp"
                     sdf = sdf.sort_index()
+
                     if "vwap" not in sdf.columns and "close" in sdf.columns:
                         sdf["vwap"] = sdf["close"]
-                    if not all(c in sdf.columns for c in ("open", "high", "low", "close", "volume")):
+
+                    required_cols = ("open", "high", "low", "close", "volume")
+                    if not all(c in sdf.columns for c in required_cols):
                         continue
+
                     cols = [c for c in ("open", "high", "low", "close", "volume", "vwap") if c in sdf.columns]
                     sdf = sdf[cols]
+
                     if limit and len(sdf) > limit:
                         sdf = sdf.iloc[-limit:]
+
                     results[sym] = sdf
+
                     cache_key = f"{sym}_{timeframe}"
                     self._cache[cache_key] = sdf
                     self._last_fetch[cache_key] = now
+
             else:
                 if len(symbols) == 1:
                     sym = symbols[0]
                     df = df_all.copy()
                     df.index.name = "timestamp"
                     df = df.sort_index()
+
                     if "vwap" not in df.columns and "close" in df.columns:
                         df["vwap"] = df["close"]
+
                     results[sym] = df
 
         except Exception as e:
             logger.error(f"Error fetching multi bars: {e}")
+
         return results
 
     def get_latest_price(self, symbol: str) -> Optional[float]:
@@ -184,10 +215,13 @@ class DataFeed:
 
     def get_latest_prices(self, symbols: List[str]) -> Dict[str, float]:
         prices: Dict[str, float] = {}
+
         bars = self.get_multi_bars(symbols, limit=1)
+
         for symbol, df in bars.items():
             if df is not None and len(df) > 0:
                 prices[symbol] = float(df["close"].iloc[-1])
+
         return prices
 
     def clear_cache(self):

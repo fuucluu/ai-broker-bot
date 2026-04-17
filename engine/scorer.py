@@ -33,12 +33,12 @@ class Scorer:
         self.min_trades = clustering_cfg.get("min_cluster_trades", 30)
         self.min_expectancy = clustering_cfg.get("min_expectancy", 0.001)
 
-        # 🔒 Safety caps for exploratory trades
+        # Safety caps for exploratory trades
         self.max_exploratory_per_cluster = clustering_cfg.get(
-            "max_exploratory_trades", 1
+            "max_exploratory_trades", 3
         )
         self.min_exploratory_expectancy = clustering_cfg.get(
-            "min_exploratory_expectancy", -0.002
+            "min_exploratory_expectancy", -0.005
         )
 
     # ============================================================
@@ -59,7 +59,7 @@ class Scorer:
         if vector is None:
             return None
 
-        # 🔁 Always add sample (learning never stops)
+        # Always add sample so learning continues
         self.patterns.add_sample(vector)
 
         cluster_id = self.patterns.predict_cluster(vector)
@@ -76,7 +76,6 @@ class Scorer:
 
         cluster_stats = self.patterns.get_cluster_quality(cluster_id)
 
-        # 🔍 Option A: Exploratory trade bootstrap
         exploratory = False
         if not should_trade:
             if (
@@ -109,20 +108,35 @@ class Scorer:
             regime = get_market_regime(spy_features)
             score = self._apply_regime_adjustment(score, side, regime)
 
-        # 🔒 Score floor
-        if score < 0.3:
+        # Prevent weak / flat trades
+        ret = features.iloc[-1].get("ret_1bar", 0)
+        if abs(ret) < 0.0005:
             return None
+
+        # Stronger score floor
+        if exploratory:
+            if score < 0.45:
+                return None
+        else:
+            if score < 0.55:
+                return None
 
         confidence = self._calculate_confidence(cluster_stats, symbol_stats)
 
         # ------------------------------------------------------------
-        # LOGGING (IMPORTANT)
+        # LOGGING
         # ------------------------------------------------------------
 
         if exploratory:
             logger.info(
                 f"[EXPLORATORY] {symbol} cluster={cluster_id} "
                 f"score={score:.2f} exp={cluster_stats['expectancy']:.4f}"
+            )
+        else:
+            logger.info(
+                f"[LEARNED] {symbol} cluster={cluster_id} "
+                f"score={score:.2f} exp={cluster_stats['expectancy']:.4f} "
+                f"quality={cluster_stats['quality']}"
             )
 
         return TradeSignal(
@@ -152,7 +166,7 @@ class Scorer:
         quality: Dict,
         symbol_stats: Optional[Dict],
     ) -> float:
-        score = 0.5
+        score = 0.4
         row = features.iloc[-1]
 
         # Cluster quality
@@ -170,6 +184,8 @@ class Scorer:
 
         if quality["expectancy"] > 0.02:
             score += 0.1
+        elif quality["expectancy"] > 0.01:
+            score += 0.05
 
         rsi = row.get("rsi14", 50)
         if 30 < rsi < 70:
@@ -179,12 +195,22 @@ class Scorer:
         if vol_z > 1:
             score += 0.05
 
+        ema_spread = abs(row.get("ema_spread", 0))
+        if ema_spread > 0.2:
+            score += 0.05
+
+        ret_1bar = abs(row.get("ret_1bar", 0))
+        if ret_1bar > 0.001:
+            score += 0.05
+
         if symbol_stats:
             trades = max(symbol_stats["total_trades"], 1)
             sym_wr = symbol_stats["wins"] / trades
 
             if trades > 10 and sym_wr > 0.55:
                 score += 0.1
+            elif trades > 10 and sym_wr < 0.40:
+                score -= 0.1
 
             if symbol_stats["consecutive_losses"] >= 3:
                 score -= 0.2
@@ -239,6 +265,9 @@ class Scorer:
         if quality["win_rate"] > 0.55:
             confidence += 0.15
 
+        if quality["expectancy"] > 0.01:
+            confidence += 0.05
+
         if symbol_stats and symbol_stats["total_trades"] >= 20:
             wr = symbol_stats["wins"] / symbol_stats["total_trades"]
             if wr > 0.5:
@@ -247,7 +276,7 @@ class Scorer:
         return min(confidence, 1.0)
 
     # ============================================================
-    # EXIT LOGIC (UNCHANGED)
+    # EXIT LOGIC
     # ============================================================
 
     def should_exit(

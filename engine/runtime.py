@@ -2,7 +2,6 @@
 import os
 import time
 import logging
-from typing import Dict, List, Optional
 from datetime import datetime
 
 from reporter import send_report
@@ -83,10 +82,11 @@ class TradingEngine:
             while self.running:
                 loop_start = time.time()
 
-                # ✅ EMAIL REPORT
+                # ✅ DAILY EMAIL REPORT
                 now = datetime.utcnow()
-                if now.hour == 21 and now.minute < 5:
-                    today = now.date()
+                today = now.date()
+
+                if now.hour >= 21:
                     if self._last_report_date != today:
                         try:
                             acct = self.execution.get_account() or {}
@@ -120,7 +120,10 @@ class TradingEngine:
                     continue
 
                 if not is_market_open():
-                    logger.info(f"Market closed. Status: {get_market_status()} (opens in {time_until_open()})")
+                    logger.info(
+                        f"Market closed. Status: {get_market_status()} "
+                        f"(opens in {time_until_open()})"
+                    )
                     time.sleep(60)
                     continue
 
@@ -148,52 +151,104 @@ class TradingEngine:
             self.db.close()
 
     def _trading_cycle(self, timeframe: str):
-        bars_data = self.data_feed.get_multi_bars(self.symbols, timeframe, limit=300)
+        # Optional news pause
+        try:
+            news_result = self.news.process_news(self.symbols)
+            if news_result.get("should_pause"):
+                logger.warning("News triggered trading pause")
+                return
+        except Exception:
+            pass
 
+        bars_data = self.data_feed.get_multi_bars(self.symbols, timeframe, limit=300)
         signals = []
 
+        # Build signals
         for symbol in self.symbols:
             bars = bars_data.get(symbol)
-            if bars is None:
+            if bars is None or len(bars) == 0:
                 continue
 
             features = extract_features(bars)
-            if features is None:
+            if features is None or len(features) == 0:
                 continue
 
             signal = self.scorer.evaluate_entry(symbol, features, None)
             if signal:
                 signals.append((signal, features, bars))
 
+        # ✅ Retrain model using config-driven interval
+        try:
+            retrain_hours = self.config.get("clustering", {}).get("retrain_interval_hours", 6)
+            if self.patterns.needs_retrain(retrain_hours):
+                trained = self.patterns.train()
+                if trained:
+                    logger.info("🔥 Pattern model trained/retrained")
+        except Exception as e:
+            logger.warning(f"Model training error: {e}")
+
         if not signals:
             return
 
-        can_trade, _ = self.risk.can_trade()
-        if not can_trade:
-            return
-
+        # Sort best-first
         signals.sort(key=lambda x: x[0].score, reverse=True)
-        signal, features, bars = signals[0]
+        logger.info(f"Total signals this cycle: {len(signals)}")
 
-        last_price = float(bars["close"].iloc[-1])
-        atr = float(features["atr14"].iloc[-1]) if "atr14" in features.columns else 0
+        # ✅ Try signals until one succeeds
+        for signal, features, bars in signals:
+            can_trade, reason = self.risk.can_trade()
+            if not can_trade:
+                logger.info(f"Trade blocked globally: {reason}")
+                return
 
-        qty, _ = self.risk.calculate_position_size(last_price, atr, 0.5)
+            # Per-symbol risk gate
+            ok_sym, sym_reason = self.risk.can_trade_symbol(signal.symbol)
+            if not ok_sym:
+                logger.info(f"{signal.symbol} blocked: {sym_reason}")
+                continue
 
-        if qty <= 0:
-            return
+            try:
+                last_price = float(bars["close"].iloc[-1])
+            except Exception:
+                logger.info(f"{signal.symbol} skipped: bad price data")
+                continue
 
-        try:
-            self.portfolio.open_position(
-                symbol=signal.symbol,
-                side=signal.side,
-                qty=qty,
+            atr = float(features["atr14"].iloc[-1]) if "atr14" in features.columns else 0.0
+
+            qty, _ = self.risk.calculate_position_size(
                 price=last_price,
-                cluster_id=getattr(signal, "cluster_id", None),
+                atr=atr,
+                confidence=float(signal.confidence) if hasattr(signal, "confidence") else 0.5,
             )
-            self.risk.record_trade(signal.symbol)
-        except Exception as e:
-            logger.error(f"Trade failed: {e}")
+
+            if qty <= 0:
+                logger.info(f"{signal.symbol} skipped: qty=0")
+                continue
+
+            try:
+                position_id = self.portfolio.open_position(
+                    symbol=signal.symbol,
+                    side=signal.side,
+                    qty=qty,
+                    price=last_price,
+                    cluster_id=getattr(signal, "cluster_id", None),
+                )
+
+                if position_id:
+                    self.risk.record_trade(signal.symbol)
+                    logger.info(
+                        f"✅ TRADE EXECUTED: {signal.symbol} {signal.side} "
+                        f"qty={qty} score={signal.score:.2f} "
+                        f"cluster={getattr(signal, 'cluster_id', None)}"
+                    )
+                    break
+                else:
+                    logger.info(f"{signal.symbol} blocked/failed: no position id returned")
+                    continue
+
+            except Exception as e:
+                logger.info(f"{signal.symbol} blocked/failed: {e}")
+                continue
 
     def _print_dashboard(self):
         try:

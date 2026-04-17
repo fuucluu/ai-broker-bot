@@ -1,74 +1,112 @@
-import os
-import yaml
+"""Utility helpers for AI Broker."""
 import logging
-from datetime import datetime
-from zoneinfo import ZoneInfo
+import os
+from pathlib import Path
+from typing import Any, Dict, List
 
-NY_TZ = ZoneInfo("America/New_York")
-
-
-def load_config(path: str = "config/settings.yaml") -> dict:
-    """Load YAML configuration file."""
-    if not os.path.exists(path):
-        raise FileNotFoundError(f"Config file not found: {path}")
-
-    with open(path, "r", encoding="utf-8") as f:
-        return yaml.safe_load(f) or {}
+import yaml
 
 
-def load_symbols(path: str) -> list:
-    """Load symbols from text file."""
-    if not os.path.exists(path):
-        raise FileNotFoundError(f"Symbols file not found: {path}")
+def load_config(config_path: str = "config/settings.yaml") -> Dict[str, Any]:
+    path = Path(config_path)
+    if not path.exists():
+        raise FileNotFoundError(f"Config file not found: {config_path}")
 
-    with open(path, "r", encoding="utf-8") as f:
-        return [line.strip().upper() for line in f if line.strip()]
+    with path.open("r", encoding="utf-8") as f:
+        config = yaml.safe_load(f) or {}
+
+    return config
 
 
-def setup_logging(config: dict | None = None):
-    """Setup logging configuration."""
-    config = config or {}
+def load_symbols(symbols_path: str = "config/symbols.txt") -> List[str]:
+    path = Path(symbols_path)
+    if not path.exists():
+        raise FileNotFoundError(f"Symbols file not found: {symbols_path}")
 
-    log_level = getattr(logging, config.get("level", "INFO").upper(), logging.INFO)
-    log_dir = config.get("dir", "storage/logs")
-    os.makedirs(log_dir, exist_ok=True)
+    symbols: List[str] = []
+    with path.open("r", encoding="utf-8") as f:
+        for raw_line in f:
+            line = raw_line.strip().upper()
+            if not line:
+                continue
+            if line.startswith("#"):
+                continue
+            symbols.append(line)
 
-    log_file = os.path.join(log_dir, "ai_broker.log")
+    # Deduplicate while preserving order
+    seen = set()
+    unique_symbols: List[str] = []
+    for sym in symbols:
+        if sym not in seen:
+            seen.add(sym)
+            unique_symbols.append(sym)
 
-    logging.basicConfig(
-        level=log_level,
-        format="%(asctime)s | %(levelname)-8s | %(name)s | %(message)s",
-        handlers=[
-            logging.FileHandler(log_file, encoding="utf-8"),
-            logging.StreamHandler(),
-        ],
+    return unique_symbols
+
+
+def setup_logging(config: dict):
+    level_name = str(config.get("level", "INFO")).upper()
+    level = getattr(logging, level_name, logging.INFO)
+    log_file = config.get("file", "ai_broker.log")
+
+    # Make sure log directory exists if a relative/absolute path includes folders
+    log_path = Path(log_file)
+    if log_path.parent and str(log_path.parent) not in ("", "."):
+        log_path.parent.mkdir(parents=True, exist_ok=True)
+
+    # Clear existing handlers so re-runs do not duplicate logs
+    root_logger = logging.getLogger()
+    for handler in root_logger.handlers[:]:
+        root_logger.removeHandler(handler)
+
+    root_logger.setLevel(level)
+
+    formatter = logging.Formatter(
+        "%(asctime)s | %(levelname)-8s | %(name)s | %(message)s"
     )
 
+    file_handler = logging.FileHandler(log_path, encoding="utf-8")
+    file_handler.setLevel(level)
+    file_handler.setFormatter(formatter)
 
-def kill_switch_active() -> bool:
-    """Check for STOP_TRADING file."""
-    return os.path.exists("STOP_TRADING")
+    stream_handler = logging.StreamHandler()
+    stream_handler.setLevel(level)
+    stream_handler.setFormatter(formatter)
 
+    root_logger.addHandler(file_handler)
+    root_logger.addHandler(stream_handler)
 
-def check_paper_mode_safety(config: dict):
-    """Ensure system cannot run in live mode."""
-    mode = str(config.get("mode", "paper")).lower()
-    if mode != "paper":
-        raise RuntimeError("Refusing to run: mode is not PAPER")
+    # Quiet noisy third-party loggers a bit
+    logging.getLogger("urllib3").setLevel(logging.WARNING)
+    logging.getLogger("requests").setLevel(logging.WARNING)
+    logging.getLogger("alpaca").setLevel(logging.INFO)
 
-    if os.environ.get("ALLOW_LIVE", "").lower() in ("1", "true", "yes"):
-        raise RuntimeError("Refusing to run: ALLOW_LIVE is set")
-
-
-def print_banner():
-    print(
-        "\n"
-        "============================================================\n"
-        "    AI BROKER - PAPER TRADING SYSTEM\n"
-        "    ⚠️  PAPER MODE ONLY - NO REAL MONEY ⚠️\n"
-        "============================================================\n"
-    )
+    root_logger.info(f"Logging initialized -> level={level_name}, file={log_path}")
 
 
-def now_et():
-    return datetime.now(NY_TZ)
+def kill_switch_active(stop_file: str = "STOP_TRADING") -> bool:
+    return Path(stop_file).exists()
+
+
+def check_paper_mode_safety(config: Dict[str, Any]) -> None:
+    if os.environ.get("ALLOW_LIVE", "").strip().lower() in ("1", "true", "yes"):
+        raise RuntimeError("ALLOW_LIVE detected. This system is PAPER-ONLY.")
+
+    alpaca_base_url = os.environ.get("ALPACA_BASE_URL", "").strip().lower()
+    if alpaca_base_url and "paper" not in alpaca_base_url:
+        raise RuntimeError(
+            f"Unsafe ALPACA_BASE_URL detected: {alpaca_base_url}. "
+            "This system must use Alpaca paper trading only."
+        )
+
+    broker_cfg = config.get("broker", {})
+    mode = str(broker_cfg.get("mode", "paper")).strip().lower()
+    if mode not in ("paper", ""):
+        raise RuntimeError(f"Unsafe broker mode in config: {mode}")
+
+
+def print_banner() -> None:
+    print("\n" + "=" * 60)
+    print("    AI BROKER - PAPER TRADING SYSTEM")
+    print("    ⚠️  PAPER MODE ONLY - NO REAL MONEY ⚠️")
+    print("=" * 60 + "\n")
